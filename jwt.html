@@ -1,0 +1,42 @@
+<head>
+    <title>Jwt decode</title>    
+</head>
+
+<style>
+    textarea {
+        margin: 10px;
+    }
+</style>
+
+<body>
+   <label for="jwt">Jwt token</label>
+   <br />
+   <textarea id="jwtInput" name="jwt" placeholder="jwt token" rows="20" cols="50"></textarea> 
+   <br />
+   <textarea readonly="true" id="decodedOutput" placeholder="decoded jwt output" rows="20" cols="50"></textarea>
+</body>
+
+<script>
+   console.log("Hello World!")
+   const inputTextArea = document.getElementById("jwtInput")
+   const outputTextArea = document.getElementById("decodedOutput")
+
+   inputTextArea.addEventListener('input', () => {
+       const inputJWT = inputTextArea.value;
+       const inputArray = inputJWT.split(".")
+       const alg = _jsonFormatter(atob(inputArray[0]))
+       const claims = _jsonFormatter(atob(inputArray[1]))
+       const signature = "[signature]"
+       console.log(alg)
+       console.log(claims)
+       const outText = `${alg}.${claims}.${signature}`
+        console.log(outText)
+       outputTextArea.innerText = outText;
+   }, false);
+
+   function _jsonFormatter(str){
+       return JSON.stringify(JSON.parse(str), null, 4) 
+   }
+</script>
+
+
