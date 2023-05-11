@@ -24,19 +24,13 @@
    inputTextArea.addEventListener('input', () => {
        const inputJWT = inputTextArea.value;
        const inputArray = inputJWT.split(".")
-       const alg = _jsonFormatter(atob(inputArray[0]))
-       const claims = _jsonFormatter(atob(inputArray[1]))
+       const alg = atob(inputArray[0])
+       const claims = atob(inputArray[1])
        const signature = "[signature]"
-       console.log(alg)
-       console.log(claims)
        const outText = `${alg}.${claims}.${signature}`
-        console.log(outText)
        outputTextArea.innerText = outText;
    }, false);
 
-   function _jsonFormatter(str){
-       return JSON.stringify(JSON.parse(str), null, 4) 
-   }
 </script>
 
 
